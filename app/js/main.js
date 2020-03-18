@@ -27,13 +27,13 @@ Highcharts.setOptions({
     }
 });
 
-let chartId = document.getElementById("chart-container");
+let chartIdBMHistory = document.getElementById("chart-container-bear-market-history");
 
 // checks for the chart ID and displays a backup image if the browser can't find it
 setTimeout(function() {
-    if(chartId.innerHTML === "") {
+    if(chartIdBMHistory.innerHTML === "") {
         // console.log('noId');
-        let chartArea = document.getElementsByClassName("chart-area");
+        let chartArea = document.getElementsByClassName("chart-area-bear-market-history");
         for(var i = 0; i < chartArea.length; i++) {
             chartArea[i].style.display = "none";
         } 
@@ -45,70 +45,77 @@ setTimeout(function() {
 },500);
 
 function drawHighcharts() {
-    Highcharts.chart(chartId, {
+    Highcharts.chart(chartIdBMHistory, {
         chart: {
-            type: 'bar',
+            type: 'variwide',
             styledMode: true,
             spacingBottom: 25,
-            spacingRight: 100
+            spacingRight: 100,
+            marginLeft: 40
         }, 
         title: {
             text: null
         },
-        data: {
-            googleSpreadsheetKey: '1YOKb5l2VM4aAB2r20N_1aT_1vEajYrP3U-U3A6lZbC0'
-        },
-        // for bar charts only
+        series: [{
+            data: [
+                ["May 1946 – October '46",26.6,4.4],
+                ["June 1948 – June '49",20.6,12.1],
+                ["July 1957 – Oct. '57",20.7,3.3],
+                ["Dec. 1961 – June '62",28.0,6.5],
+                ["Feb. 1966 – Oct. '66",22.2,8.0],
+                ["Nov. 1968 – May '70",36.1,18.1],
+                ["Jan. 1973 – Oct. '74",48.2,21.0],
+                ["Nov. 1980 – Aug. '82",27.1,20.7],
+                ["Aug. 1987 – Dec. '87",33.5,3.4],
+                ["March 2000 – Oct. '02",49.1,31.0],
+                ["Oct. 2007 – March '09",56.8,17.2],
+            ],
+        }],
         plotOptions: {
             series: {
-                groupPadding: 0.1
-            } 
+                dataLabels: {
+                    enabled: true,
+                    // useHTML: true,  
+                    format: '{point.z:,.0f}',
+                    allowOverlap: true,
+                    verticalAlign: 'top',
+                    align: 'center'
+                },
+            }
         },
-        // for line charts only
-        // plotOptions: {
-        //     series: {
-        //         lineWidth: 1,
-        //         // clip: false,
-        //         marker: {
-        //             enabled: false,
-        //             symbol: 'circle',
-        //             fillColor: '#ffffff',
-        //             states: {
-        //                 hover: {
-        //                     fillColor: '#ffffff'
-        //                 }
-        //             }
-        //         }
-        //     }
-        // },
         legend: {
-            align: 'right',
-            symbolRadius: 0,
-            verticalAlign: 'top',
-            x: 10,
-            itemMarginTop: -10
+            enabled: false
         },
         xAxis: {
-            labels: {
-                style: {
-                    whiteSpace: 'nowrap'
-                }
+            title: {
+                text: 'Duration of bear market, in months',
+                align: 'low'
             },
-            tickLength: 5
+            type: 'category',
+            labels: {
+                enabled: false,
+                overflow: 'allow',
+                padding: 20,
+                style: {
+                    whiteSpace: 'wrap'
+                },
+            }
         },
         yAxis: {
             title: false,
             labels: {
                 useHTML: true,
                 overflow: 'allow'
-            }
+            },
         },
         credits: {
             enabled: false
         },
         tooltip: {
             shadow: false,
-            padding: 10
+            padding: 10,
+            pointFormat: '<b>Percent loss:</b> {point.y:.1f}%<br>' +
+                '<b>Duration:</b> {point.z} months<br>'
         },
         responsive: {
             rules: [{
