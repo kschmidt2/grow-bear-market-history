@@ -51,6 +51,7 @@ function drawHighcharts() {
             styledMode: true,
             spacingBottom: 25,
             spacingRight: 100,
+            spacingTop: 15,
             marginLeft: 40
         }, 
         title: {
@@ -58,17 +59,17 @@ function drawHighcharts() {
         },
         series: [{
             data: [
-                ["May 1946 – October '46",26.6,4.4],
-                ["June 1948 – June '49",20.6,12.1],
-                ["July 1957 – Oct. '57",20.7,3.3],
-                ["Dec. 1961 – June '62",28.0,6.5],
-                ["Feb. 1966 – Oct. '66",22.2,8.0],
-                ["Nov. 1968 – May '70",36.1,18.1],
-                ["Jan. 1973 – Oct. '74",48.2,21.0],
-                ["Nov. 1980 – Aug. '82",27.1,20.7],
-                ["Aug. 1987 – Dec. '87",33.5,3.4],
-                ["March 2000 – Oct. '02",49.1,31.0],
-                ["Oct. 2007 – March '09",56.8,17.2],
+                ["May 1946 – October '46",-26.6,4.4],
+                ["June 1948 – June '49",-20.6,12.1],
+                ["July 1957 – Oct. '57",-20.7,3.3],
+                ["Dec. 1961 – June '62",-28.0,6.5],
+                ["Feb. 1966 – Oct. '66",-22.2,8.0],
+                ["Nov. 1968 – May '70",-36.1,18.1],
+                ["Jan. 1973 – Oct. '74",-48.2,21.0],
+                ["Nov. 1980 – Aug. '82",-27.1,20.7],
+                ["Aug. 1987 – Dec. '87",-33.5,3.4],
+                ["March 2000 – Oct. '02",-49.1,31.0],
+                ["Oct. 2007 – March '09",-56.8,17.2],
             ],
         }],
         plotOptions: {
@@ -89,7 +90,8 @@ function drawHighcharts() {
         xAxis: {
             title: {
                 text: 'Duration of bear market, in months',
-                align: 'low'
+                align: 'low',
+                y: -260
             },
             type: 'category',
             labels: {
